@@ -7,7 +7,7 @@ export interface Profile {
 
 export const profile: Profile = {
   name: '谢涵韫',
-  title: '前端开发工程师',
-  location: '城市 · 国家',
+  title: 'AI Agent工程师',
+  location: '长沙 · 中国',
   skills: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
 }

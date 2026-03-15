@@ -5,9 +5,9 @@ const ProjectsSection = () => {
   return (
     <section id="projects" className="px-4 py-16 sm:px-6">
       <div className="mx-auto max-w-5xl">
-        <h2 className="text-2xl font-semibold text-slate-900">项目展示</h2>
+        <h2 className="text-2xl font-semibold text-slate-900">工作经历</h2>
         <p className="mt-4 max-w-2xl text-slate-600">
-          下面是一些代表性的项目，后面你可以把这些示例替换成真实项目。
+          长沙燕山科技有限公司｜广告运行岗｜2025.03 - 至今
         </p>
 
         <div className="mt-8 grid gap-6 sm:grid-cols-2">

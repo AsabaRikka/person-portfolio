@@ -6,15 +6,15 @@ const HeroSection = () => {
     >
       <div className="mx-auto max-w-3xl text-center">
         <p className="text-sm font-medium text-sky-600 mb-3">
-          前端开发 · 个人作品集
+          个人网页 · 个人作品集
         </p>
 
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-          你好，我是 XXX
+          你好，我是 谢涵韫
         </h1>
 
         <p className="text-base sm:text-lg text-slate-600 mb-8">
-          专注于 React、TypeScript 与前端工程化，喜欢把想法变成线上可用的产品体验。
+          专注于使用AI Agent进行前端工程化，喜欢把想法变成线上可用的产品体验。
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
