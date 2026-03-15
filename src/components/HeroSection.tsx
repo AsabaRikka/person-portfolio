@@ -2,9 +2,9 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="section bg-slate-50"
+      className="px-4 py-16 sm:px-6 sm:py-24"
     >
-      <div className="max-w-3xl mx-auto text-center py-16 sm:py-24">
+      <div className="mx-auto max-w-3xl text-center">
         <p className="text-sm font-medium text-sky-600 mb-3">
           前端开发 · 个人作品集
         </p>
