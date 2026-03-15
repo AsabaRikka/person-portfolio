@@ -1,18 +1,39 @@
 const HeroSection = () => {
-    return (
-      <section id="home" className="section">
-        <h1>你好，我是 XXX</h1>
-        <p>这里是一句简短的身份介绍，比如「前端开发工程师，专注于 React 与前端工程化」。</p>
-        <div className="hero-actions">
-          <a href="#projects" className="btn-primary">
+  return (
+    <section
+      id="home"
+      className="section bg-slate-50"
+    >
+      <div className="max-w-3xl mx-auto text-center py-16 sm:py-24">
+        <p className="text-sm font-medium text-sky-600 mb-3">
+          前端开发 · 个人作品集
+        </p>
+
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+          你好，我是 XXX
+        </h1>
+
+        <p className="text-base sm:text-lg text-slate-600 mb-8">
+          专注于 React、TypeScript 与前端工程化，喜欢把想法变成线上可用的产品体验。
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a
+            href="#projects"
+            className="inline-flex items-center justify-center rounded-full bg-sky-600 px-6 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-sky-700 transition-colors"
+          >
             查看项目
           </a>
-          <a href="#contact" className="btn-secondary">
+          <a
+            href="#contact"
+            className="inline-flex items-center justify-center rounded-full border border-sky-600 px-6 py-2.5 text-sm font-medium text-sky-700 bg-white hover:bg-sky-50 transition-colors"
+          >
             联系我
           </a>
         </div>
-      </section>
-    )
-  }
-  
+      </div>
+    </section>
+  )
+}
+
 export default HeroSection
