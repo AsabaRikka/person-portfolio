@@ -5927,7 +5927,1058 @@ _**Agent (model default, mode Agent)**_
 
 3. **补齐 PRD 的非功能项：基础 SEO + 移动端体验验收**
    - 在 `index.html` 加站点标题与 `meta description`（PRD 4.2）。
-   - 按 AGENTS 的 Mobile First 要求，在 375–430px 宽度下逐段检查：导航、按钮点击区域、Section 间距、
+   - 按 AGENTS 的 Mobile First 要求，在 375–430px 宽度下逐段检查：导航、按钮点击区域、Section 间距、文本可读性，并做必要 Tailwind 微调。
+
+---
+
+_**User**_
+
+先完成第一点，暂时不用管真实内容的填写，先完整整个网页的前端效果，再考虑内容的填充，在此之前内容都以占位的形式填写
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Implementing contact data file**
+
+I need to implement a contact data file and use it in the ContactSection. It's crucial that experience and education are already data-driven, but contact information isn't yet. I’ll create a `src/data/contact.ts` file and update the ContactSection to include elements like mailto links, GitHub, and optional phone or WeChat QR codes. Plus, I need to ensure there's no existing `contact.ts` file referenced in the TECH section. I'll follow a structured approach and use tools to ease the implementation.</details></think>
+
+---
+
+我先把「第一点」拆成可落地的结果：创建 `src/data/contact.ts`（占位联系方式数据），然后把 `ContactSection` 改成完全数据驱动渲染（邮箱 mailto、GitHub、其它链接按钮/卡片），这样页面结构与三个文档就闭环了。接着我会跑一次简单的类型检查/lint 确保没有报错。
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/ContactSection.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="generic" data-tool-name="glob_file_search">
+<details>
+<summary>Tool use: **glob_file_search** • Searched codebase "undefined" • **0** result in **1** directory</summary>
+
+Directory: **/Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data** (0 file)
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/contact.ts</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/ContactSection.tsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="read_lints">
+<details>
+<summary>Tool use: **read_lints**</summary>
+
+
+Parameters:
+
+```json
+{
+  "paths": [
+    "src/components/ContactSection.tsx",
+    "src/data/contact.ts"
+  ]
+}
+```
+Result:
+
+```json
+{
+  "linterErrorsByFile": [
+    {
+      "relativeWorkspacePath": "src/components/ContactSection.tsx"
+    },
+    {
+      "relativeWorkspacePath": "src/data/contact.ts"
+    }
+  ]
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+### 已完成第一点（先做占位，先把网页效果闭环）
+
+#### 1) 新增了占位联系方式数据文件
+- 已创建：`src/data/contact.ts`
+- 包含字段（都可先占位，后面再换真实内容）：
+  - `email`
+  - `githubUrl`
+  - `links[]`（掘金/知乎等）
+  - `phone?`（可选）
+  - `wechatQrText?`（可选，占位“二维码信息”，后面可换成图片方案）
+
+#### 2) `ContactSection` 已改为完全数据驱动
+- 已更新：`src/components/ContactSection.tsx`
+- 页面现在会展示：
+  - 邮箱（可点击 `mailto:`）
+  - GitHub（外链打开）
+  - 电话/微信（如果数据里有就显示）
+  - 其他链接按钮列表（从 `links[]` 渲染）
+
+#### 3) 质量检查
+- 我检查了这两个文件，**没有 linter 报错**。
+
+---
+
+### 你现在要做的验证（1 分钟）
+浏览器滚到「联系方式」区块确认：
+
+- 邮箱是可点击的（点击会打开邮件客户端）
+- GitHub/其他链接会在新标签页打开
+- 占位电话/微信卡片是否显示（取决于 `contact.ts` 是否填了）
+
+如果 OK，下一步我们继续把“第一点”彻底补齐：**把 `ContactSection` 的文案/按钮风格统一到全站，并把 Navbar 的文案改成中文（或中英一致）**，让视觉体验更统一。
+
+---
+
+_**User**_
+
+@PRD.md @TECH_DISIGN.md @AGENTS.md 帮我根据这三个文档，检查整个项目MVP功能的实现情况，暂时不考虑样式的设计
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Reviewing MVP Feature Implementation**
+
+I need to summarize the implementation status of the MVP feature compared to the documentation. I'll inspect project files, checking key components and data, including index.html. It seems I need a checklist for gaps, like ensuring the navigation includes all necessary sections. There are discrepancies between the PRD and current setup, especially regarding buttons and sections not implemented. Also, I should verify if SEO considerations are included and check if localStorage and scroll reveal are utilized. Let’s read through the key components like App, Navbar, and more.</details></think>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/App.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/HeroSection.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/Navbar.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/AboutSection.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/ContactSection.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/index.html</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/ProjectsSection.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/EducationSection.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/ExperienceSection.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/projects.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/education.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/contact.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+**Evaluating MVP features**
+
+I need to check the MVP features based on the PRD sections and focus on the status rather than the style. The project data currently has placeholders due to user changes, but that’s okay. I should note that the Home quick button needs to include experience, and the About section is lacking a photo, job intent, summary, and brief experiences. Contact meets the requirements. Also, the SEO, such as the index.html title and meta tags, is missing. Tech mentioned needing optional localStorage and scroll reveal hooks, so I should provide an actionable list for these points.</details></think>
+
+---
+
+### MVP 功能实现核对结果（按 `PRD.md` / `TECH_DISIGN.md` / `AGENTS.md`，暂不看样式）
+
+## 1) PRD 功能模块对照
+
+- **2.1 首页 Home（部分完成）**
+  - **已实现**：大标题、简短简介、快速按钮（目前有“查看项目”“联系我”）。
+  - **未对齐**：PRD 写的是快速按钮跳转到「工作经历」「项目」「联系」——当前 `HeroSection` **缺少跳转 `#experience` 的按钮**。
+
+- **2.2 关于我 About（部分完成，数据驱动已做）**
+  - **已实现**：姓名/标题/所在地（来自 `src/data/profile.ts`）、技能标签列表（数据驱动）。
+  - **未对齐/缺项**：
+    - PRD 的“求职意向”目前没在 `profile.ts` 和 `AboutSection` 展示。
+    - “头像/照片（可选）”未做。
+    - “简略经历 2–3 条”目前未做（现在 About 只有基本信息 + 技能）。
+
+- **2.3 工作经历 Experience（✅ 已对齐你最新 PRD 结构）**
+  - **已实现**：`#experience` 区块存在；按“经历大块（公司/岗位/时间）+ 亮点卡片列表（标题+要点+标签）”渲染。
+  - **MVP 数量**：示例数据已满足“至少 2 段经历、每段至少 1 张亮点卡片”的结构要求（内容先占位也 OK）。
+
+- **2.4 项目展示 Projects（✅ 基础完成）**
+  - **已实现**：`#projects` 区块存在；从 `src/data/projects.ts` 读取数组；按 `order` 排序；用 `ProjectCard` 渲染卡片；可选 Demo/Repo 外链逻辑已具备（有 URL 才显示按钮）。
+  - **注意**：你现在把 `projects.ts` 改成了“占位”内容，这符合你“先做前端效果再填内容”的策略。
+
+- **2.5 教育经历 Education（✅ 基础完成）**
+  - **已实现**：`#education` 区块存在；从 `src/data/education.ts` 读取；支持 highlights/honors 的可选渲染；按 `order` 排序。
+
+- **2.6 联系方式 Contact（✅ 已数据驱动）**
+  - **已实现**：`#contact` 区块存在；`src/data/contact.ts` 驱动渲染；邮箱是 `mailto:`；GitHub/其他链接是外链；电话/微信为可选字段。
+
+## 2) TECH_DISIGN / AGENTS 关键点对照（偏功能/结构）
+
+- **单页 + 锚点导航（✅ 已完成）**
+  - `Navbar` 同时包含 desktop + mobile 菜单，并覆盖 `home/about/experience/projects/education/contact`。
+  - `App.tsx` 也确实渲染了对应区块组件。
+
+- **“数据集中在 src/data”（✅ 已完成）**
+  - `profile/projects/experience/education/contact` 都在 `src/data/`，组件以 import 使用。
+
+- **localStorage / useLocalStorage（未实现，但属于增强项）**
+  - TECH/AGENTS 提到作为体验增强可做；PRD MVP 不依赖它，所以现在不做也不算缺 MVP。
+
+- **滚动进入视口动效（未实现，但属于体验项）**
+  - PRD 3.2 / TECH 4.2 提到；你说“暂不考虑样式设计”，严格讲这块可以后置。
+
+## 3) 当前 MVP “真正缺的”两处（不涉及样式）
+
+1. **Home 的快速按钮缺少 `#experience` 跳转**（PRD 2.1）
+2. **About 缺少“求职意向 + 简略经历（2–3 条）/照片可选”数据与展示**（PRD 2.2）
+
+此外还有一个“非功能需求”小缺口（不算样式）：  
+- **基础 SEO 未配置**：`index.html` 里 `<title>` 还是默认 `person-portfolio-tmp`，且没有 `meta description`（PRD 第四部分）。
+
+如果你确认，我们下一步可以先把 **Home 增加“工作经历”按钮** + **About 增加求职意向/简历要点的占位数据结构与渲染**（都用占位数据，不用真实内容）。
+
+---
+
+_**User**_
+
+下一步：完成 3) 当前 MVP “真正缺的”两处（不涉及样式）
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Implementing missing features**
+
+I need to implement a Home button to improve the user experience. The About section should include job intentions and a brief overview of experiences, with a photo as an optional placeholder. The user specifically mentioned these two missing pieces. I plan to edit the data/profile.ts file to add the new fields and update the AboutSection render. Additionally, I'll add a third button to the HeroSection for the #experience. I need to check the Read tool before I’m done with everything.</details></think>
+
+---
+
+好，我们现在只补齐 **两处真正缺的 MVP 功能**（不追求样式，只保证功能/结构对 PRD 对齐）：
+
+- **Home**：加一个按钮跳转到 `#experience`
+- **About**：增加「求职意向」与「简略经历（2–3 条）」的占位数据结构，并在页面渲染出来（头像/照片先留可选字段，不强制展示）
+
+我会直接改 `src/data/profile.ts`、`src/components/AboutSection.tsx`、`src/components/HeroSection.tsx`，改完你刷新页面就能看到。
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/profile.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/AboutSection.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/HeroSection.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/profile.ts</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/AboutSection.tsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/HeroSection.tsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="read_lints">
+<details>
+<summary>Tool use: **read_lints**</summary>
+
+
+Parameters:
+
+```json
+{
+  "paths": [
+    "src/data/profile.ts",
+    "src/components/AboutSection.tsx",
+    "src/components/HeroSection.tsx"
+  ]
+}
+```
+Result:
+
+```json
+{
+  "linterErrorsByFile": [
+    {
+      "relativeWorkspacePath": "src/data/profile.ts"
+    },
+    {
+      "relativeWorkspacePath": "src/components/AboutSection.tsx"
+    },
+    {
+      "relativeWorkspacePath": "src/components/HeroSection.tsx"
+    }
+  ]
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+### 已完成：MVP 真正缺的两处（不涉及样式）
+
+#### 1) Home 快速按钮补齐「工作经历」
+- 我已在 `src/components/HeroSection.tsx` 里新增一个按钮：
+  - `href="#experience"`（点击可跳转到工作经历区块）
+
+#### 2) About 补齐「求职意向 + 简略经历（2–3 条）」占位实现
+- 我已在 `src/data/profile.ts` 里新增占位字段：
+  - `jobIntention`（目标方向/期望地点/到岗时间）
+  - `briefExperience`（数组，默认 3 条占位）
+  - `avatarUrl?`（可选占位字段，先不展示）
+- 我已在 `src/components/AboutSection.tsx` 中把这些字段渲染出来：
+  - 有数据就显示，没有就不显示（避免你删字段时报错）
+
+并且这三处修改 **没有 linter 报错**。
+
+### 你现在怎么验证（30 秒）
+浏览器刷新后检查：
+- Hero 区域是否多了一个「工作经历」按钮，点击能滚动到工作经历区块
+- About 区域是否出现「求职意向」「简略经历」两块内容（占位文字即可）
+
+如果 OK，下一步我们就可以补 PRD 的非功能项：`index.html` 的 `<title>` + `meta description`（依然不涉及样式）。
+
+---
+
+_**User**_
+
+下一步：补 PRD 的非功能项：index.html 的 <title> + meta description（依然不涉及样式）。
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/index.html</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/index.html</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+### 已补齐 PRD 的非功能项：`index.html` 的 `<title>` + `meta description`
+
+我已经更新了 `index.html`：
+
+- **语言**：`<html lang="zh-CN">`
+- **站点标题**：`谢涵韫 · AI Agent 工程师 · 个人作品集`
+- **描述**：新增 `<meta name="description" ...>`，包含身份与核心技能关键词，并提到工作经历/项目/联系方式
+
+你现在在浏览器里刷新页面后可以验证两点：
+
+1. **浏览器标签页标题**是否变成新的标题  
+2. 打开“查看页面源代码”或开发者工具 Elements，能看到 `<meta name="description" ...>`
+
+如果 OK，PRD 里“基础 SEO”的 MVP 要求就完成了。
+
+---
+
+_**User**_
+
+@PRD.md (90-91) 接下来帮我规划这个新功能的文本需求文档
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+### 迭代项：网页信息导出「简历模板 PDF」功能（文本需求文档草案）
+
+#### 1. 背景与目标
+- **背景**：访客或你自己希望把网页里的信息（About/Experience/Projects/Education/Contact）一键导出为可投递的简历 PDF。
+- **目标**：在不引入后端的前提下，让用户从网页生成一份结构清晰、可打印、可下载的 PDF 简历。
+
+#### 2. 范围（MVP / V1）
+- **V1 支持导出内容**（全部来自 `src/data/*`，保持一致性）：
+  - 基本信息：姓名、title、location
+  - 求职意向：目标方向/地点/到岗时间
+  - 技能标签
+  - 工作经历（经历大块 + 亮点卡片）
+  - 教育经历
+  - 项目展示（可选：只导出前 N 个、或按 `order` 导出全部）
+  - 联系方式：邮箱、GitHub、其他链接（电话/微信可选）
+- **V1 不包含**：
+  - 多语言版本简历
+  - 多模板切换（先 1 套模板）
+  - 在线编辑（只读导出）
+
+#### 3. 用户故事
+- **作为访客**：我想点击“下载简历 PDF”，获得一份可保存/打印的 PDF。
+- **作为你自己**：我想保证网页内容更新后，导出的 PDF 也自动同步更新，不用手动维护两份简历。
+
+#### 4. 入口与交互
+- **入口位置**（任选其一，后续可同时提供）：
+  - Hero 区域按钮：`下载简历 PDF`
+  - Navbar：`Resume`
+  - Contact 区域：`下载简历`
+- **交互流程（V1）**：
+  - 点击按钮 → 打开一个“简历预览页 / 打印视图”
+  - 在该页面提供：
+    - `下载 PDF`（或 `打印/保存为 PDF`）
+    - `返回主页`
+- **状态与反馈**：
+  - 生成中：显示 loading（若生成很快可不做）
+  - 失败：提示“生成失败，请重试/换浏览器”
+
+#### 5. 简历 PDF 的版式要求（模板）
+- **基本布局**：一页优先（信息多可自动分页）
+- **建议区块顺序**：
+  1) Header：姓名 + title + location + 联系方式（邮箱/GitHub/链接）
+  2) 求职意向（可选）
+  3) 技能
+  4) 工作经历（按时间/`order`）
+  5) 项目（按 `order`）
+  6) 教育经历
+- **排版约束**：
+  - A4 纸张
+  - 适合黑白打印（不要依赖背景色）
+  - 链接以可点击文本形式呈现（PDF 内可点）
+
+#### 6. 数据规则与排序
+- **排序**：
+  - Experience/Education/Projects 按 `order` 升序（或你定义的时间规则）
+- **字段缺失容错**：
+  - 可选字段为空就不展示（电话/微信/荣誉等）
+- **长度限制建议**（避免 PDF 过长）：
+  - 每段工作经历最多展示 N 张亮点卡片（默认全部）
+  - 每张亮点卡片 bullets 最多 4 条（PRD 已约束）
+
+#### 7. 非功能需求
+- **一致性**：导出数据来源必须是 `src/data/*`，不允许复制粘贴另一份文本。
+- **性能**：生成 PDF 不应明显卡顿（内容较多时可拆分分页）。
+- **兼容性**：主流 Chrome / Edge / Safari 可用；移动端可先不保证。
+- **可维护性**：模板结构清晰，后续可添加第二套模板而不推翻现有实现。
+
+#### 8. 验收标准（V1）
+- 点击入口能生成/下载（或打印保存）PDF。
+- PDF 内容与网页展示信息一致（以 `src/data` 为准）。
+- 可选字段不填时不会出现空白占位。
+- Experience 模块以“经历大块 + 亮点卡片列表”形式正确导出。
+- 生成的 PDF 在 A4 上可读、不会元素重叠。
+
+#### 9. 技术实现备注（写在需求里供后续对齐）
+- **方案 A（最简单）**：提供一个专用 `ResumePage`（仅 HTML+CSS），调用浏览器 `window.print()`，用户“另存为 PDF”。
+- **方案 B（更自动）**：用前端库生成 PDF（例如基于 DOM 截图或 HTML 转 PDF），但实现复杂度更高，V1 建议先 A。
+
+---
+
+如果你同意这个需求文档结构，我下一步可以把它整理成 `PRD.md` 的“可迭代项”下的完整小节（例如 `5.1 简历导出 PDF`），并同步在 `TECH_DISIGN.md` 里补一个对应的技术方案小节。
+
+---
+
+_**User**_
+
+先整理在@PRD.md 中
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/PRD.md</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/PRD.md</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+已把该新功能整理进 `PRD.md` 的「## 五、可迭代项」中，作为 **`5.1 网页信息导出「简历模板 PDF」`** 小节，包含：
+
+- 背景与目标
+- 范围（V1 导出哪些数据、V1 不做什么）
+- 入口与交互
+- 简历模板要求（A4、区块顺序、可点击链接等）
+- 数据规则与容错（按 `order` 排序、可选字段不展示）
+- 验收标准（V1）
+- 实现方式备注（优先 `window.print()`）
+
+你现在可以打开 `PRD.md` 末尾检查这一段是否符合你的预期；如果你希望我再把它压缩成更短的“真正 PRD 口吻”（更少技术备注、更多用户角度），我也可以继续帮你精简一版。
+
+---
+
+_**User**_
+
+V1版本可以，同步到@TECH_DISIGN.md 和@AGENTS.md 
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/TECH_DISIGN.md</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/AGENTS.md</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search">
+<details>
+<summary>Tool use: **ripgrep_raw_search**</summary>
+
+
+Parameters:
+
+```json
+{
+  "pattern": "简历|PDF|Resume|window\\.print",
+  "path": "/Users/rain/Documents/Vibe Coding/260313/person-portfolio/TECH_DISIGN.md",
+  "outputMode": "content",
+  "caseInsensitive": false
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "pattern": "简历|PDF|Resume|window\\.print",
+  "path": "/Users/rain/Documents/Vibe Coding/260313/person-portfolio/TECH_DISIGN.md",
+  "outputMode": "content",
+  "totalFiles": 0,
+  "totalMatches": 0,
+  "topFiles": []
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/TECH_DISIGN.md</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/AGENTS.md</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+已把你确认的 **简历导出 PDF（V1）** 同步到两个文档里了。
+
+### `TECH_DISIGN.md`
+- 在「## 七、后续可迭代方向（非 MVP）」新增一条：
+  - 网页信息导出「简历模板 PDF」（V1 优先 `window.print()` 打印方案）
+
+### `AGENTS.md`
+- 在开发规范里新增「简历导出（可迭代项）」约定：
+  - **数据源必须来自 `src/data/*`**
+  - **V1 优先打印视图 `window.print()` → 另存为 PDF**
+
+如果你希望更“完整同步”（例如在 `TECH_DISIGN.md` 里新增一个小节专门写实现方案、页面结构 `ResumePage.tsx`、打印样式策略等），我也可以继续把技术设计补成一个独立章节。
+
+---
+
+_**User**_
+
+完整同步，在在 TECH_DISIGN.md 里新增一个小节专门写实现方案、页面结构 ResumePage.tsx、打印样式策略等
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Editing documentation structure**
+
+I'm planning to patch TECH_DESIGN.md by adding a new section, possibly right before the existing "七 后续" section. The new title would be "七、简历导出（可迭代 V1）," and I think I should renumber the existing sections accordingly, shifting "七" to "八" for future items. I need to make sure this is a careful edit, especially since it's a larger change. I’ll apply the patch with the new section correctly inserted!</details></think>
+
+---
+
+我会在 `TECH_DISIGN.md` 里新增一个独立小节，完整描述 V1「简历导出 PDF」的技术方案：入口、页面结构（`ResumePage.tsx`）、数据来源、打印（`window.print()`）流程、以及 `@media print` 的样式策略，并且保持与当前“无路由、锚点导航”的 MVP 架构兼容。
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/TECH_DISIGN.md</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+已完成“完整同步”：我在 `TECH_DISIGN.md` 新增了独立小节 **「七、简历导出（可迭代 V1：打印视图 → PDF）」**，并把原来的“七、后续可迭代方向”顺延为 **「八」**。
+
+新增内容包含你要的三个关键点：
+
+- **实现方案**：V1 推荐 `ResumePage` + `window.print()`（浏览器另存为 PDF），并说明 V2+ 才考虑 PDF 生成库  
+- **页面结构**：不引入路由库，使用 `/?view=resume` 查询参数切换视图（与当前“单页锚点导航”兼容），并给出文件规划建议 `src/pages/ResumePage.tsx`  
+- **打印样式策略**：新增 `src/styles/print.css` 的建议，用 `@media print`、`@page A4`、隐藏非简历元素、避免断页、链接打印可读等规则说明  
+
+如果你接下来要开始落地实现 V1，我可以按这份 TECH 继续：先创建 `ResumePage.tsx`（用 `src/data/*` 渲染简历内容）+ `print.css`，再改 `App.tsx` 支持 `?view=resume`。
+
+---
+
+_**User**_
+
+接下来开始落地实现V1，帮我拆成三步进行，先完成第一步
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Planning resume page implementation**
+
+I need to create a three-step plan and get started on the first step. The first step involves adding the ResumePage component and setting up a minimal view switch in App.tsx. I'll scaffold the ResumePage with a basic layout, a print button, and a possible link entry in the Navbar. The steps will be: 1) scaffold ResumePage and switch, 2) implement content mapping from data, and 3) add print styles and polish. First, I'll create the `src/pages/ResumePage.tsx` and modify App.tsx to render it conditionally when `?view=resume`.
+**Implementing file updates**
+
+I need to use ApplyPatch to add a file and update App. It's important to ensure there are no issues with hooks. I wonder if I should include `useMemo`, but it seems it's not needed for this case. I’ll parse the search parameters inside the App's render, noting that window access during build is fine since we're working client-side. I’ll avoid any concerns with server-side rendering. Now, I just need to implement this and make sure to run the lints. Let's proceed!</details></think>
+
+---
+
+我把 V1 落地拆成 **三步**，并先把**第一步做到可访问、可切换、可打印**（先是占位简历页，后两步再把内容填满、加打印样式）。  
+- **第 1 步（现在做）**：创建 `ResumePage.tsx`（含“打印/下载 PDF”“返回主页”按钮）+ `App.tsx` 支持 `/?view=resume` 切换视图 + 提供一个入口链接。  
+- **第 2 步**：在 `ResumePage` 里把 `src/data/*`（profile/experience/projects/education/contact）按 PRD 顺序完整渲染。  
+- **第 3 步**：新增 `print.css` 并用 `@media print` 做 A4 打印策略（隐藏按钮、页边距、避免断页等），最后做验收清单。  
+
+现在先做第 1 步。
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/App.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/Navbar.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/pages/ResumePage.tsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/App.tsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/Navbar.tsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="read_lints">
+<details>
+<summary>Tool use: **read_lints**</summary>
+
+
+Parameters:
+
+```json
+{
+  "paths": [
+    "src/App.tsx",
+    "src/pages/ResumePage.tsx",
+    "src/components/Navbar.tsx"
+  ]
+}
+```
+Result:
+
+```json
+{
+  "linterErrorsByFile": [
+    {
+      "relativeWorkspacePath": "src/App.tsx"
+    },
+    {
+      "relativeWorkspacePath": "src/pages/ResumePage.tsx"
+    },
+    {
+      "relativeWorkspacePath": "src/components/Navbar.tsx"
+    }
+  ]
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+### V1 落地三步拆解（已完成第 1 步）
+
+- **第 1 步（✅ 已完成）**：创建简历视图 `ResumePage.tsx` + `/?view=resume` 切换 + 提供入口（Navbar 的 Resume）
+- **第 2 步**：把 `src/data/*` 全部按 PRD 顺序渲染进 `ResumePage`
+- **第 3 步**：新增 `print.css` 并用 `@media print` 做打印策略（隐藏工具栏、A4 margin、避免断页等）
+
+---
+
+## 第 1 步我做了什么
+
+#### 1) 新增简历页面组件
+- 新增：`src/pages/ResumePage.tsx`
+- 有两个按钮：
+  - **打印 / 下载 PDF**：触发 `window.print()`
+  - **返回主页**：回到 `/`
+
+#### 2) `App.tsx` 支持查询参数切换视图
+- 当访问 `/?view=resume` 时，直接渲染 `ResumePage`
+- 否则渲染原来的单页（Navbar + Sections）
+
+#### 3) 给用户一个入口
+- `Navbar` 的桌面端和移动端菜单都新增了 **Resume** 链接：`/?view=resume`
+
+并且我检查了相关文件，**没有 linter 报错**。
+
+---
+
+## 你现在怎么验证（30 秒）
+1. 浏览器打开首页后，点击导航里的 **Resume**
+2. URL 变成 `/?view=resume`，看到「简历预览（V1）」和两个按钮
+3. 点 **打印 / 下载 PDF** 会打开浏览器打印面板
+4. 点 **返回主页** 回到 `/`
+
+如果这些都 OK，我们就进入 **第 2 步：用 `src/data/*` 填充简历页内容**。
+
+---
+
+_**User**_
+
+进行第2步
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Planning resume rendering**
+
+I need to implement the resume rendering using data. I’ll edit the ResumePage to import details like profile, experiences, projects, education, and contact, ensuring to render the sections in the order specified in the PRD. 
+
+While avoiding too much focus on styles, a bit of Tailwind is okay. I want to ensure the order is correct; for experience, I’ll render the header and a list of cards. I'll include project fields and links for the contact section. After the edit, a lint check will be done.</details></think>
+
+---
+
+第 2 步我们要做的是：把 `ResumePage` 的“占位内容”换成**真正从 `src/data/*` 读取并渲染**的简历内容（顺序按 PRD：Header → 求职意向 → 技能 → 工作经历 → 项目 → 教育 → 联系方式）。我会先一次性把 `ResumePage.tsx` 改到可用版本，然后你刷新 `/?view=resume` 就能看到完整简历预览。
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/pages/ResumePage.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/experience.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/projects.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/contact.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/profile.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/education.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/pages/ResumePage.tsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="read_lints">
+<details>
+<summary>Tool use: **read_lints**</summary>
+
+
+Parameters:
+
+```json
+{
+  "paths": [
+    "src/pages/ResumePage.tsx"
+  ]
+}
+```
+Result:
+
+```json
+{
+  "linterErrorsByFile": [
+    {
+      "relativeWorkspacePath": "src/pages/ResumePage.tsx"
+    }
+  ]
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+### 第 2 步已完成：`ResumePage` 现在完全由 `src/data/*` 驱动渲染
+
+我已经把 `src/pages/ResumePage.tsx` 从“占位文本”改成了按 PRD 顺序输出完整简历内容，并且：
+
+- **数据源**：全部来自 `src/data/profile.ts`、`experience.ts`、`projects.ts`、`education.ts`、`contact.ts`
+- **排序**：Experience / Projects / Education 都按 `order` 升序
+- **结构**：工作经历按你新版 PRD 的“经历大块 + 亮点卡片列表”渲染
+- **链接**：
+  - 邮箱是 `mailto:`
+  - GitHub/其他链接是外链
+  - Projects 若有 `demoUrl/repoUrl` 会在简历里输出链接
+
+并且 `ResumePage.tsx` **没有 linter 报错**。
+
+### 你现在怎么验证（1 分钟）
+1. 打开 `/?view=resume`
+2. 看是否依次出现这些块：
+   - Header（姓名/标题/地点/联系方式链接）
+   - 求职意向（如果 `profile.jobIntention` 存在）
+   - 技能
+   - 工作经历（经历大块 + 多张亮点卡片）
+   - 项目展示
+   - 教育经历
+   - 联系方式补充（电话/微信可选）
+
+如果 OK，我们就进入 **第 3 步：打印样式策略**（新增 `src/styles/print.css`，并在打印时隐藏工具栏、设置 A4 margin、避免断页等）。
 
 ---
 

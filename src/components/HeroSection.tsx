@@ -19,6 +19,12 @@ const HeroSection = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
+            href="#experience"
+            className="inline-flex items-center justify-center rounded-full border border-slate-300 px-6 py-2.5 text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 transition-colors"
+          >
+            工作经历
+          </a>
+          <a
             href="#projects"
             className="inline-flex items-center justify-center rounded-full bg-sky-600 px-6 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-sky-700 transition-colors"
           >

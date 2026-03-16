@@ -218,10 +218,87 @@ person-portfolio/
 
 ---
 
-## 七、后续可迭代方向（非 MVP）
+## 七、简历导出（可迭代 V1：打印视图 → PDF）
+
+> 目标：将网页信息（统一数据源 `src/data/*`）导出为可投递/可打印的简历 PDF。V1 以“打印视图”方案优先，降低实现复杂度并确保可用性。
+
+### 7.1 方案选型
+
+- **V1 推荐方案：打印视图 + `window.print()`**
+  - 在浏览器中打开一个专用的简历页面/视图（Resume）。
+  - 用户点击「打印/下载 PDF」按钮后调用 `window.print()`。
+  - 由浏览器原生能力“另存为 PDF”完成导出。
+- **后续可选方案（V2+）**
+  - 引入 HTML → PDF / DOM → PDF 的前端库做“一键下载 PDF”，但成本更高、兼容性需评估。
+
+### 7.2 页面结构设计（不引入路由库）
+
+MVP 不使用 React Router，因此 V1 推荐使用 **查询参数** 切换视图：
+
+- 首页正常访问：`/`
+- 简历视图访问：`/?view=resume`
+
+实现思路：
+
+- `App.tsx` 读取 `new URLSearchParams(window.location.search)`。
+- 当 `view === 'resume'` 时渲染 `ResumePage`；否则渲染当前的单页区块（Navbar + Sections）。
+- `ResumePage` 内提供「返回主页」链接：`/`（或移除 query）。
+
+> 备注：若未来需要独立 URL（如 `/resume`）再考虑引入路由或 Vite 多页面（`resume.html` + 单独入口）。
+
+### 7.3 组件与文件规划（V1）
+
+在现有结构上新增：
+
+```text
+src/
+  ├─ pages/
+  │  └─ ResumePage.tsx      # 简历打印视图（仅展示，不复用 Navbar/Section 布局）
+  └─ styles/
+     ├─ index.css           # 站点全局样式（Tailwind 入口）
+     └─ print.css           # 打印专用样式（@media print）
+```
+
+> MVP 仍保持组件集中在 `components/`；若你更倾向于极简目录，也可以把 `ResumePage.tsx` 暂时放在 `components/`，后续再迁移到 `pages/`。
+
+### 7.4 ResumePage 数据来源与内容映射（V1）
+
+- **数据源要求**：只能读取 `src/data/*`，禁止手写第二份简历内容，避免双维护。
+- **建议导出内容顺序**（与 PRD 5.1 对齐）：
+  1. Header：姓名 + title + location + 联系方式（email/github/links；phone/wechat 可选）
+  2. 求职意向（可选）
+  3. 技能
+  4. 工作经历（经历大块 + 亮点卡片）
+  5. 项目展示（按 `order`）
+  6. 教育经历（按 `order`）
+
+### 7.5 打印样式策略（V1）
+
+目标：A4 可读、适合黑白打印、布局不溢出。
+
+- 新增 `src/styles/print.css` 并在 `ResumePage` 中引入（或在全局引入，但仅对简历视图生效）。
+- 核心规则（建议）：
+  - `@media print` 下隐藏非简历元素（如返回按钮、顶部提示等）。
+  - 设置打印页边距：使用 `@page { size: A4; margin: 12mm; }`（不同浏览器支持度略有差异）。
+  - 使用可打印友好的颜色：避免大面积背景色；强调信息用字体粗细/下划线代替。
+  - 链接可点击且可读：保持 `<a href>`，必要时打印模式下增加 `text-decoration: underline;`。
+  - 避免断页尴尬：对“经历大块/项目卡片”使用 `break-inside: avoid;`（部分浏览器支持）。
+
+### 7.6 导出交互（V1）
+
+- 在 `ResumePage` 顶部提供两个按钮：
+  - **打印/下载 PDF**：触发 `window.print()`
+  - **返回主页**：移除 `view=resume` 并回到 `/`
+- 错误处理：
+  - `window.print()` 通常不会抛错；若浏览器限制弹窗/打印，可提示用户手动使用浏览器菜单打印。
+
+---
+
+## 八、后续可迭代方向（非 MVP）
 
 - 引入动画库（如 Framer Motion）增强交互体验。
 - 接入 Headless CMS 或远程数据源管理项目/内容。
 - 增加多语言切换（中/英）。
 - 增加博客/文章系统与项目详情页。
+- 增加网页信息导出「简历模板 PDF」功能（V1 优先使用打印方案 `window.print()`）。
 

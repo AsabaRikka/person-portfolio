@@ -32,6 +32,12 @@ const Navbar = () => {
           <a className="hover:text-slate-900 transition-colors" href="#contact">
             Contact
           </a>
+          <a
+            className="hover:text-slate-900 transition-colors"
+            href="/?view=resume"
+          >
+            Resume
+          </a>
         </nav>
 
         {/* 移动端汉堡按钮 */}
@@ -93,6 +99,13 @@ const Navbar = () => {
               onClick={() => setIsOpen(false)}
             >
               Contact
+            </a>
+            <a
+              href="/?view=resume"
+              className="py-1.5 hover:text-slate-900"
+              onClick={() => setIsOpen(false)}
+            >
+              Resume
             </a>
           </div>
         </nav>
