@@ -20,8 +20,14 @@ const Navbar = () => {
           <a className="hover:text-slate-900 transition-colors" href="#about">
             About
           </a>
+          <a className="hover:text-slate-900 transition-colors" href="#experience">
+            Experience
+          </a>
           <a className="hover:text-slate-900 transition-colors" href="#projects">
             Projects
+          </a>
+          <a className="hover:text-slate-900 transition-colors" href="#education">
+            Education
           </a>
           <a className="hover:text-slate-900 transition-colors" href="#contact">
             Contact
@@ -61,11 +67,25 @@ const Navbar = () => {
               About
             </a>
             <a
+              href="#experience"
+              className="py-1.5 hover:text-slate-900"
+              onClick={() => setIsOpen(false)}
+            >
+              Experience
+            </a>
+            <a
               href="#projects"
               className="py-1.5 hover:text-slate-900"
               onClick={() => setIsOpen(false)}
             >
               Projects
+            </a>
+            <a
+              href="#education"
+              className="py-1.5 hover:text-slate-900"
+              onClick={() => setIsOpen(false)}
+            >
+              Education
             </a>
             <a
               href="#contact"

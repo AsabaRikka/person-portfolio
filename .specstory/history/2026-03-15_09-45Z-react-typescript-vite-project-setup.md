@@ -5029,3 +5029,905 @@ I’ll need this summary in Chinese, keeping it concise and structured with head
 
 ---
 
+_**User**_
+
+首先根据我修改后的@PRD.md 文件进行确认，对新加入的2.3 2.5小节是否需要进行修改，另外核对@PRD.md 全文
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Reviewing PRD document**
+
+I need to read the current PRD.md to provide a review and suggest modifications, specifically for sections 2.3 and 2.5. I’ll use the Read tool to access this document. It's important to ensure that I focus on the relevant sections so that I can provide thoughtful feedback and recommendations. I want to make sure I capture any important points that could improve the document. Let’s get started!</details></think>
+
+---
+
+我先把你最新的 `PRD.md` 通读一遍，重点核对你新增的 **2.3、2.5** 是否和 MVP 范围一致、与 `TECH_DISIGN.md` 和当前实现是否冲突，然后给出需要修改/补充的建议稿。
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/PRD.md</summary>
+
+</details>
+</tool-use>
+
+---
+
+### 结论：2.3 / 2.5 **需要做小幅修改**（主要是措辞与字段一致性）
+
+你新增的 **2.3 工作经历**、**2.5 教育经历**整体方向没问题（符合“简历式作品集”目标），但目前有几处会导致实现时容易跑偏或产生歧义，建议调整。
+
+---
+
+## 2.3 工作经历（Experience）建议修改点
+
+- **结构层级不清晰**：L27-L30 现在像是 “title 下嵌多层”，但没写清楚是“要点列表”还是“分段文本”。
+- **字段命名混杂**：用 `title` 描述“公司｜岗位｜时间”可以，但更清晰的是拆成字段（公司/岗位/时间），或者明确 `title` 只是展示字符串。
+- **MVP 范围建议更克制**：你写了“亮眼表现小标题 + 详细介绍 + 能力标签”，这其实已经接近完整简历模块了。MVP 也能做，但建议明确“每段 2–4 条要点”，避免变成大篇幅文章。
+
+**建议改写版本（更可实现、对齐 MVP）：**
+
+- **内容**：工作经历卡片列表，展示公司、岗位、起止时间、2–4 条要点、能力标签（可选）。
+  - 每个经历卡片包含：
+    - **标题行**：公司名称｜岗位名称｜起止时间
+    - **亮点要点（bullet list）**：2–4 条（每条 1 句话）
+    - **能力标签（可选）**：如 React、性能优化、工程化等
+- **MVP 要求**：
+  - 至少 2 条经历
+  - 仅列表展示（不做详情页/展开页）
+
+---
+
+## 2.5 教育经历（Education）建议修改点
+
+- **“工作起止时间”用词错误**：教育经历应是“**学习起止时间**”。
+- **同样层级问题**：标题/亮点/详细介绍/荣誉成果的层级需要更明确。
+- **MVP 建议**：教育经历一般 1–2 条即可（本科/硕士），不一定要很多。
+
+**建议改写版本：**
+
+- **内容**：教育经历卡片列表，从本科开始（或最高学历优先），展示学校、专业、学历、学习起止时间、荣誉/成果（可选）。
+  - 每个经历卡片包含：
+    - **标题行**：学校名称｜专业名称｜学历层次｜学习起止时间
+    - **亮点要点（可选）**：1–3 条（课程/竞赛/论文/项目等）
+    - **荣誉/成果（可选）**：如奖学金、竞赛奖项、论文等
+- **MVP 要求**：
+  - 列表展示即可，不做详情页
+
+---
+
+## PRD 全文核对（是否还有需要修的地方）
+
+- **1 产品目标（OK，但建议精炼）**：你加了“求职意向/经历”很合理，但现在一句话信息量很大。建议拆成两句，更清晰。
+- **2.1 首页**：按钮现在写“工作经历/项目/联系”，与 3.1 导航锚点（含 Experience/Education）一致 ✅  
+  但这意味着页面需要新增两个区块（Experience/Education），后续 `TECH_DISIGN.md` 的目录结构也要同步更新（目前文档组件列表还没有 `ExperienceSection`、`EducationSection`）。
+- **2.2 关于我**：
+  - 你加了“年龄/学历层次”，没问题，但要注意隐私与歧视风险（产品层面可选项即可）。
+  - “证件照”建议改成“头像/照片（可选）”，更自然。
+- **2.6 联系方式**：
+  - “电话”是否一定要公开？建议标注“可选”。
+  - “至少 1 个其他社交媒体或博客链接（如 微信 小红书 等）”——微信通常不适合直接放链接（除非二维码/图片），建议写成“微信（二维码图片，可选）/掘金/知乎/LinkedIn/小红书等”更可落地。
+- **3.2 动效**：
+  - 现在只写了“项目卡片滚动进入”，如果你新增 Experience/Education 也有卡片，建议一句话扩展为“卡片类模块进入视口淡入/上滑”（更统一）。
+
+---
+
+### 我建议你现在就做的最小改动清单（不改结构，只修歧义）
+
+- **2.3**：明确“要点列表 2–4 条”，把层级写清楚。
+- **2.5**：把“工作起止时间”改为“学习起止时间”，同样明确要点列表。
+- **2.6**：电话标注可选；微信建议改成“微信二维码（可选）”。
+
+如果你愿意，我可以直接给你一份**可直接粘贴替换的 `PRD.md`（仅修改 2.3/2.5/2.6 和少量措辞）**，你确认后再应用到文件里。你希望我按“最小修改”来改，还是顺便把整个 PRD 的表达再整体润色一遍（不改变需求，只提升一致性和可执行性）？
+
+---
+
+_**User**_
+
+把整个 PRD 的表达再整体润色一遍
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Preparing to edit PRD.md**
+
+I need to edit the PRD.md document, and I must read it again before completing any edits. I've already gone through it, so now I'll use the ApplyPatch update file for refining the wording while ensuring the requirements stay intact. It’s important that the final edits are concise, so I plan to patch the entire file this time. Let’s get this done clearly and effectively!</details></think>
+
+---
+
+我会在**不改变需求范围**的前提下，把 `PRD.md` 全文做一次一致性润色：统一模块命名、字段层级、MVP 约束措辞，并修正少量歧义（例如教育经历时间表述、联系方式可选项）。润色完你直接就能按它实现。
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/PRD.md</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+### 已完成：`PRD.md` 全文整体润色（不改需求，只提可执行性）
+
+我已经把你新增的 **2.3 工作经历**、**2.5 教育经历**做了**更可落地的层级/字段描述**，并对全文做了统一化处理，重点变化如下：
+
+- **产品目标**：拆成两句，更清晰且不改变范围。
+- **2.2 关于我**：把“证件照”改为更自然的“头像/照片（可选）”，并把“求职意向”拆成可实现的字段。
+- **2.3 工作经历**：明确为“标题行 + 2–4 条要点 + 标签（可选）”，避免层级歧义。
+- **2.5 教育经历**：把“工作起止时间”纠正为“学习起止时间”，并明确 1–3 条要点与荣誉/成果的可选性。
+- **2.6 联系方式**：把邮箱明确为 `mailto`，电话/微信标为可选，并建议微信用二维码图更可落地。
+- **3.2 动效**：从“只写项目卡片”扩展为“卡片类模块（Projects/Experience/Education）统一进入视口淡入上滑”，更一致。
+
+你现在可以直接基于这份 PRD 往下实现下一阶段功能了。下一步如果你愿意，我建议我们同步更新 `TECH_DISIGN.md` 的组件列表与目录（加入 `ExperienceSection.tsx`、`EducationSection.tsx` 及对应 `data` 结构），保持“设计文档 ↔ 代码实现”一致。
+
+---
+
+_**User**_
+
+同步更新@TECH_DISIGN.md 
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Updating tech design**
+
+I'm looking to update the tech design to include an Experience Section, Education Section, data files, anchor IDs, and responsibilities. Also, I should think about the directory structure. First, I need to read the current file before proceeding with any patches. It's essential to get the existing layout to make these adjustments effectively. I'll make sure I handle this step-by-step to ensure everything integrates smoothly!</details></think>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/TECH_DISIGN.md</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/TECH_DISIGN.md</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+### 已同步更新 `TECH_DISIGN.md`（对齐你新版 `PRD.md`）
+
+我已经把技术设计文档按你新增的 **Experience / Education** 两个模块完整补齐，并与当前工程现状对齐，改动要点如下：
+
+- **目录结构更新**
+  - 在 `src/components/` 增加：
+    - `ExperienceSection.tsx`
+    - `EducationSection.tsx`
+  - 在 `src/data/` 增加（规划）：
+    - `experience.ts`
+    - `education.ts`
+    - `contact.ts`
+- **锚点与导航对齐**
+  - `App.tsx` / `Navbar.tsx` 的锚点 ID 规划更新为：  
+    `home / about / experience / projects / education / contact`
+- **组件职责补全**
+  - 新增 `ExperienceSection.tsx`、`EducationSection.tsx` 的职责说明（对应 PRD 2.3 / 2.5）
+- **数据结构示例补全**
+  - 新增 `data/experience.ts`、`data/education.ts`、`data/contact.ts` 的字段建议
+- **修正与当前实现一致的点**
+  - 移除了目录树里原先的 `postcss.config.js`（我们现在是通过 `vite.config.ts` 配 PostCSS）
+  - `styles/index.css` 标注为 Tailwind v4 入口
+  - 修正了标题里多余的 `ß`
+
+如果你同意，我们下一步就可以按更新后的 TECH 继续推进实现：  
+先创建 `src/data/experience.ts` + `src/components/ExperienceSection.tsx`（数据驱动渲染工作经历卡片），再做 Education 和 Contact 数据化。
+
+---
+
+_**User**_
+
+同步修改@AGENTS.md 
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Updating AGENTS.md**
+
+I need to edit AGENTS.md according to the new PRD and tech details. This means adding sections like Experience and Education, and also addressing data files, along with Tailwind v4 notes. I’ll have to check if there’s anything about proxies as well. The plan is to read through AGENTS.md carefully first, then patch it up accordingly. I want to ensure everything is up-to-date and in line with the requirements!</details></think>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/AGENTS.md</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/AGENTS.md</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+### 已同步更新 `AGENTS.md`（对齐新版 PRD/TECH）
+
+我已把 `AGENTS.md` 按你最新的产品与技术设计同步更新，核心变化：
+
+- **项目概述**：补充了“岗位匹配度”目标表述，并把主要区块更新为  
+  **Home / About / Experience / Projects / Education / Contact**。
+- **开发规范**：新增了 PRD 新模块对应的实现约定（MVP）：
+  - `ExperienceSection.tsx` + `src/data/experience.ts`
+  - `EducationSection.tsx` + `src/data/education.ts`
+  - 联系方式建议由 `src/data/contact.ts` 驱动
+- **Tailwind 使用约定**：明确当前项目是 **Tailwind v4**，入口为 `src/styles/index.css` 使用 `@import "tailwindcss";`，并强调尽量减少自定义 CSS。
+
+如果你确认没问题，我们就可以按更新后的规范开始落地：先建 `data/experience.ts` + `ExperienceSection.tsx`，并把 `App.tsx` / `Navbar.tsx` 的锚点菜单补全到 Experience/Education。
+
+---
+
+_**User**_
+
+执行 
+先建 data/experience.ts + ExperienceSection.tsx，并把 App.tsx / Navbar.tsx 的锚点菜单补全到 Experience/Education。
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Planning updates for the app**
+
+I need to implement new sections and data, so I’ll read everything before making any edits, even though I’ve already gone through the relevant material. We’ll add files, update the app to include the experience and education sections, and modify Navbar links, including them in the mobile menu. I might create a placeholder for the EducationSection or stub data for education since the user requested both sections. I’ll also ensure smooth scrolling and that the ContactSection ID exists, then run lints after all edits. Let's proceed!</details></think>
+
+---
+
+我会先把新的两类数据文件建起来（`experience.ts`、`education.ts`），再创建对应的两个区块组件（`ExperienceSection.tsx`、`EducationSection.tsx`），最后更新 `App.tsx` 和 `Navbar.tsx` 的锚点与菜单链接，并在页面里实际插入这两个区块。做完我会让你用浏览器点菜单验证跳转。
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/experience.ts</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/education.ts</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/ExperienceSection.tsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/EducationSection.tsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/App.tsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/Navbar.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/Navbar.tsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="read_lints">
+<details>
+<summary>Tool use: **read_lints**</summary>
+
+
+Parameters:
+
+```json
+{
+  "paths": [
+    "src/App.tsx",
+    "src/components/Navbar.tsx",
+    "src/components/ExperienceSection.tsx",
+    "src/components/EducationSection.tsx",
+    "src/data/experience.ts",
+    "src/data/education.ts"
+  ]
+}
+```
+Result:
+
+```json
+{
+  "linterErrorsByFile": [
+    {
+      "relativeWorkspacePath": "src/App.tsx"
+    },
+    {
+      "relativeWorkspacePath": "src/components/Navbar.tsx"
+    },
+    {
+      "relativeWorkspacePath": "src/components/ExperienceSection.tsx"
+    },
+    {
+      "relativeWorkspacePath": "src/components/EducationSection.tsx"
+    },
+    {
+      "relativeWorkspacePath": "src/data/experience.ts"
+    },
+    {
+      "relativeWorkspacePath": "src/data/education.ts"
+    }
+  ]
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+### 已完成：Experience/Education 数据 + 区块 + 锚点菜单补全
+
+我已经按你的要求把这三件事都落地了。
+
+#### 1) 新增数据文件（可直接改成你的真实经历）
+- `src/data/experience.ts`：`experiences`（2 条示例工作经历，含 highlights/tags/order）
+- `src/data/education.ts`：`educations`（1 条示例教育经历，含 highlights/honors/order）
+
+#### 2) 新增区块组件（数据驱动渲染卡片）
+- `src/components/ExperienceSection.tsx`  
+  - `id="experience"`  
+  - 按 `order` 排序后渲染卡片（标题行 + 要点列表 + 标签）
+- `src/components/EducationSection.tsx`  
+  - `id="education"`  
+  - 按 `order` 排序后渲染卡片（学校/专业/学历/时间 + 可选要点/荣誉）
+
+#### 3) 更新页面结构与导航锚点
+- **`src/App.tsx`**：已把区块插入页面顺序变为  
+  `Hero → About → Experience → Projects → Education → Contact`
+- **`src/components/Navbar.tsx`**：桌面端和移动端菜单都已新增：
+  - `Experience` → `#experience`
+  - `Education` → `#education`
+
+并且我已经检查过相关文件，**没有 linter 报错**。
+
+---
+
+### 你现在怎么验证（1 分钟）
+在浏览器里（`npm run dev` 正在跑）：
+
+- 点击导航里的 **Experience**，应滚动到「工作经历」
+- 点击导航里的 **Education**，应滚动到「教育经历」
+- 在手机宽度下打开汉堡菜单，点 Experience/Education 也应能跳转并自动收起菜单
+
+如果你确认跳转都 OK，下一步我们就可以把 `ContactSection` 也改成数据驱动（新增 `src/data/contact.ts`），并把 `Navbar` 的文案改成中文（或中英混排）来对齐你的 PRD。
+
+---
+
+_**User**_
+
+@PRD.md 修改了工作经历卡片的展示形式，你帮我调整一下2.3
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Adjusting PRD section**
+
+I need to adjust the 2.3 section of the PRD to fit the new display. First, I’ll read the current version of section 2.3. Once I’ve done that, I can then apply the necessary changes. I’ll be using the Read and ApplyPatch tools to ensure that everything is updated correctly. Getting this right is important, so I’ll take my time to ensure I make the proper adjustments without mistakes!</details></think>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/PRD.md</summary>
+
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+**Adjusting display elements**
+
+I need to adjust the section 2.3 to reflect a new display that includes a larger div for company, role, and time while also containing highlight cards. It sounds like wording improvements are also necessary. So, I’ll focus on patching lines 27-31 to make sure everything aligns with this new design. I want to ensure this update is clear and well-presented!</details></think>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/PRD.md</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+### 已按你新的“工作经历展示形式”调整 `PRD.md` 的 2.3
+
+我已经把 **2.3 工作经历（Experience）** 改成你说的结构：**“一段经历一个大块（公司/岗位/时间） + 该经历下包含亮点卡片列表”**，并同步把 MVP 约束改为：
+
+- 至少 **2 段工作经历（大块）**
+- 每段经历至少 **1 张亮点卡片**
+- 仍然只做列表展示（不做详情/展开）
+
+如果你接下来希望代码实现也对齐这个结构，我们下一步就需要把 `src/data/experience.ts` 从「每段经历直接 highlights」升级为「每段经历下有 `cards[]`」，并调整 `ExperienceSection.tsx` 的渲染方式（我可以继续一步一步带你改）。
+
+---
+
+_**User**_
+
+先同步修改@AGENTS.md @TECH_DISIGN.md 
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Updating documentation and guidelines**
+
+I need to update the documentation to reflect the new experience structure, specifically the experience block with cards. That involves updating the TECH_DESIGN data schema and component description. I'll also revise the AGENTS guidelines to align with these changes. I'll be sure to read the information before applying the patch and will apply each file separately to ensure everything is done correctly. This seems straightforward, but I want to ensure all details are covered!</details></think>
+
+---
+
+我先把 `AGENTS.md` 和 `TECH_DISIGN.md` 里关于「工作经历 Experience」的数据结构与组件职责同步到你刚改的 PRD（大块经历 + 亮点卡片列表），保证文档和后续实现是一致的。
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/AGENTS.md</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search">
+<details>
+<summary>Tool use: **ripgrep_raw_search**</summary>
+
+
+Parameters:
+
+```json
+{
+  "pattern": "experience|Experience|工作经历",
+  "path": "/Users/rain/Documents/Vibe Coding/260313/person-portfolio/TECH_DISIGN.md",
+  "outputMode": "content",
+  "caseInsensitive": false
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "pattern": "experience|Experience|工作经历",
+  "path": "/Users/rain/Documents/Vibe Coding/260313/person-portfolio/TECH_DISIGN.md",
+  "outputMode": "content",
+  "totalFiles": 1,
+  "totalMatches": 10,
+  "topFiles": [
+    {
+      "uri": "TECH_DISIGN.md",
+      "matchCount": 10
+    }
+  ]
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/TECH_DISIGN.md</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/TECH_DISIGN.md</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/AGENTS.md</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+### 已同步修改 `TECH_DISIGN.md` + `AGENTS.md`（对齐你新版 PRD 2.3）
+
+#### `TECH_DISIGN.md` 的同步点
+- **`ExperienceSection.tsx` 职责**改为：渲染“**经历大块 + 亮点卡片列表**”，而不是单层卡片列表。
+- **`data/experience.ts` 数据结构示例**改为：
+  - 每段经历包含 `cards[]`
+  - 并给出 `cards[]`（亮点卡片）建议字段：`title`, `bullets[]`, `tags[]?`
+
+#### `AGENTS.md` 的同步点
+- 新增了 **工作经历展示约定**：明确使用“经历大块（公司/岗位/时间）+ 亮点卡片列表（标题/要点/标签）”结构，保证实现时不跑偏。
+
+---
+
+如果你确认文档 OK，下一步就是把代码与数据也同步：  
+我会把当前 `src/data/experience.ts` 从 `highlights[]/tags[]` 升级为 `cards[]`，并改造 `ExperienceSection.tsx` 的渲染结构，让页面展示形式与 PRD 2.3 完全一致。
+
+---
+
+_**User**_
+
+进行下一步：把代码与数据也同步
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Updating data structures**
+
+I'm looking to update the experience data structure and component rendering. I plan to use Read followed by ApplyPatch. Additionally, I’ll need to update any types used in this context. To get started, I guess I should read the current experience.ts and ExperienceSection.tsx files to see what needs adjustment. This will help me ensure everything aligns correctly. Let's dive into those files!</details></think>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/experience.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/ExperienceSection.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<think><details><summary>Thought Process</summary>
+**Updating experience interface**
+
+I need to update the Experience interface by adding a cards array and possibly renaming highlights/tags to cards. I should define ExperienceHighlightCard with attributes like title, bullets, and tags. Then, for the ExperienceSection render, I’ll show a header line for each experience, followed by the cards list, with each card utilizing an article. An outer div may be useful for the experience block. It looks like I'll also need to patch experience.ts and ExperienceSection.tsx.</details></think>
+
+---
+
+我现在把 `experience` 的数据结构升级为“经历大块 + 亮点卡片 cards[]”，并同步改造 `ExperienceSection` 的渲染，让页面展示形式与 PRD 2.3 完全一致。
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/experience.ts</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/ExperienceSection.tsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="read_lints">
+<details>
+<summary>Tool use: **read_lints**</summary>
+
+
+Parameters:
+
+```json
+{
+  "paths": [
+    "src/data/experience.ts",
+    "src/components/ExperienceSection.tsx"
+  ]
+}
+```
+Result:
+
+```json
+{
+  "linterErrorsByFile": [
+    {
+      "relativeWorkspacePath": "src/data/experience.ts"
+    },
+    {
+      "relativeWorkspacePath": "src/components/ExperienceSection.tsx"
+    }
+  ]
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+### 已完成：Experience 代码与数据同步到新版 PRD 2.3
+
+现在你的「工作经历」已经按 PRD 的新结构实现了：
+
+- **数据层**：`src/data/experience.ts`
+  - 从原来的 `highlights[]/tags[]` 升级为 `cards[]`
+  - 每张亮点卡片包含：`title`、`bullets[]`、`tags?`
+
+- **展示层**：`src/components/ExperienceSection.tsx`
+  - 先渲染**经历大块头部**：公司｜岗位｜起止时间
+  - 再渲染该经历下的**亮点卡片列表**（每张卡片：标题 + 2–4 条要点 + 标签）
+
+并且我检查过这两个文件，**没有 linter 报错**。
+
+### 你现在怎么验证
+浏览器里滚动到「工作经历」区块，你应该看到：
+
+- 每段经历先显示公司/岗位/时间
+- 下面有 1～多张亮点卡片（卡片 hover 有轻微上移+阴影）
+
+如果你希望下一步也把 **TECH_DISIGN.md 里提到的“进入视口淡入/上滑”**加到这些卡片上，我们可以继续做一个简化版 `useScrollReveal`（IntersectionObserver）并复用到 Projects/Experience/Education。
+
+---
+
+_**User**_
+
+下一步先check@src/components/ProjectCard.tsx @src/components/ProjectsSection.tsx @src/data/profile.ts @src/data/projects.ts ，把我自己填入的一些内容初始化
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+<think><details><summary>Thought Process</summary>
+**Preparing to read files**
+
+I need to read these files first to understand the user's content. Then, I should suggest initializing the content they filled out. It’s crucial to check and adjust elements like placeholders, sorting, and links as needed. I can use the Read tool for this, and if I find anything that needs changing, I’ll apply a patch afterward. Let's get started on this process!</details></think>
+
+---
+
+我先把你点名的 4 个文件通读一遍，看看你已经填了哪些内容、哪些还是占位，以及目前组件渲染是否能完整展示（比如链接、排序、技能标签等）。然后我会给你一份“内容初始化清单”，并直接帮你把最关键的字段补齐到一个可用的初版。
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/ProjectCard.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/ProjectsSection.tsx</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/profile.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2">
+<details><summary>Tool use: **read_file_v2** • Read file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/projects.ts</summary>
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/components/ProjectsSection.tsx</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2">
+
+<details><summary>Tool use: **edit_file_v2** • Edit file: /Users/rain/Documents/Vibe Coding/260313/person-portfolio/src/data/projects.ts</summary>
+
+</details>
+
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="read_lints">
+<details>
+<summary>Tool use: **read_lints**</summary>
+
+
+Parameters:
+
+```json
+{
+  "paths": [
+    "src/components/ProjectsSection.tsx",
+    "src/data/projects.ts",
+    "src/data/profile.ts",
+    "src/components/ProjectCard.tsx"
+  ]
+}
+```
+Result:
+
+```json
+{
+  "linterErrorsByFile": [
+    {
+      "relativeWorkspacePath": "src/components/ProjectsSection.tsx"
+    },
+    {
+      "relativeWorkspacePath": "src/data/projects.ts"
+    },
+    {
+      "relativeWorkspacePath": "src/data/profile.ts"
+    },
+    {
+      "relativeWorkspacePath": "src/components/ProjectCard.tsx"
+    }
+  ]
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+### 我帮你检查后的结论（并已做了必要的“初始化修正”）
+
+你填的内容已经写进 `profile.ts` / `projects.ts` 了，整体没问题，但有两处会直接影响页面呈现，我已经帮你改好。
+
+#### 1) `src/data/profile.ts`（✅ OK）
+- 你已经把姓名/头衔/城市/技能填好了，`AboutSection` 会正确渲染。
+
+#### 2) `src/data/projects.ts`（✅ 内容已填入 + 我做了 1 个修正）
+- 你已经把 4 条“项目/成果”内容填好了。
+- **我修正了 `order` 冲突**：`project-4` 原来也是 `order: 3`，我改成了 `order: 4`，避免排序时顺序不稳定。
+- `demoUrl/repoUrl` 我保留为注释，并改成更清晰的占位写法（你后面把链接粘进去即可）。
+
+#### 3) `src/components/ProjectCard.tsx`（✅ OK）
+- 卡片展示逻辑正确：标题/描述/标签都能显示；有 `demoUrl/repoUrl` 才会出现按钮。
+
+#### 4) `src/components/ProjectsSection.tsx`（⚠️ 你之前写错标题了，我已修正）
+你之前把这里写成了“工作经历 + 公司岗位时间”，这会和 `ExperienceSection` 重复且不符合 PRD。
+- **我已改成**：
+  - 标题：`项目展示`
+  - 简介：项目区块说明
+  - 渲染：先按 `order` 排序，再 `map` 渲染卡片（`items = projects.slice().sort(...)`）
+
+---
+
+### 你现在怎么验证（30 秒）
+浏览器刷新，滚到「项目展示」区块确认：
+
+- 标题是 **项目展示**
+- 卡片按 order 从 1→4 排序
+- 标签正常显示
+
+---
+
+### 下一步建议（你选一个我就带你做）
+因为你现在的 `projects.ts` 其实更像“成果/经历亮点”，我们有两种方向：
+
+- **方向 A（保持 PRD 定义）**：把 `projects` 改成“真正的项目”（有 Demo/Repo/技术栈），把这些业绩内容放进 `experience.ts` 的 cards 里。
+- **方向 B（接受现状）**：把 `Projects` 在 PRD/TECH 里定义成“代表性成果/案例”，并调整文案（但会偏离传统“项目=代码项目”的表达）。
+
+你想走 A 还是 B？（我推荐 A，更符合面试官/访客习惯。）
+
+---
+
+_**User**_
+
+@AGENTS.md @PRD.md @TECH_DISIGN.md 现在根据三个项目文档，列出下面需要完善的事情，先列出三点
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+### 需要完善的三件事（基于 `AGENTS.md` / `PRD.md` / `TECH_DISIGN.md`）
+
+1. **补齐 Experience / Education / Contact 的“数据驱动”完整闭环**
+   - **Contact** 还没按 TECH 规划做成 `src/data/contact.ts` 并在 `ContactSection` 渲染真实的 `mailto`、GitHub、其他链接（以及电话/微信二维码可选）。
+   - **Experience / Education** 目前是示例数据，需要替换成你的真实经历，并保证字段结构与 PRD 一致（经历大块 + 亮点卡片）。
+
+2. **实现 PRD/TECH 里的“进入视口淡入/上滑”动效（IntersectionObserver）**
+   - 按 `TECH_DISIGN.md` 的方案补一个 `useScrollReveal`（或等价实现），让 Projects/Experience/Education 的卡片在滚动进入时淡入上滑。
+   - 注意性能与解绑（AGENTS/TECH 都强调这一点）。
+
+3. **补齐 PRD 的非功能项：基础 SEO + 移动端体验验收**
+   - 在 `index.html` 加站点标题与 `meta description`（PRD 4.2）。
+   - 按 AGENTS 的 Mobile First 要求，在 375–430px 宽度下逐段检查：导航、按钮点击区域、Section 间距、
+
+---
+

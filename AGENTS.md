@@ -1,13 +1,19 @@
 # 项目概述
 
-- 本项目是一个个人作品集网站，目标是快速展示「我是谁、擅长什么、做过哪些代表项目、如何联系我」。
-- 主要页面/区块包括：首页（大标题+简介）、关于我、项目展示、联系方式。
+- 本项目是一个个人作品集网站，目标是在 1 分钟内清晰展示「我是谁、擅长什么、与岗位的匹配度、做过哪些代表项目、如何联系我」。
+- 主要页面/区块包括：首页（大标题+简介）、关于我、工作经历、项目展示、教育经历、联系方式。
 - 技术栈：React + TypeScript + Vite + Tailwind CSS，数据以本地静态配置为主，少量使用 localStorage 做体验增强。
 
 # 开发规范
 
 - 使用 React 函数组件与 Hooks，配合 TypeScript，组件 Props 需要定义类型。
 - 代码结构遵循 `TECH_DISIGN.md` 中的精简目录：组件统一放在 `src/components/`，静态数据放在 `src/data/`。
+- PRD 新增模块对应组件与数据文件（MVP）：
+  - `ExperienceSection.tsx` + `data/experience.ts`
+  - `EducationSection.tsx` + `data/education.ts`
+  - `ContactSection.tsx` 建议使用 `data/contact.ts` 驱动（邮箱/GitHub/其他链接等）
+- 工作经历（Experience）展示约定（与 PRD 对齐）：
+  - 采用「经历大块 + 亮点卡片列表」的结构：先展示公司/岗位/时间，再展示该经历下的多张亮点卡片（每张卡片含标题、要点、标签）。
 - 代码中适当添加注释，尤其是：
   - 关键逻辑（如滚动锚点跳转、滚动进入视口触发动画、localStorage 读写封装）。
   - 容易引起误解的样式或交互处理。
@@ -17,6 +23,9 @@
   - 组件/文件：PascalCase（如 `HeroSection.tsx`）。
   - 变量/函数：camelCase。
   - Tailwind 类名尽量保持语义清晰、分组合理（布局类在前、颜色和动效类在后）。
+- Tailwind 使用约定（当前项目为 Tailwind v4）：
+  - 全局入口使用 `src/styles/index.css` 并通过 `@import "tailwindcss";` 引入。
+  - 优先用 Tailwind 工具类完成布局与样式，减少自定义 CSS 文件数量。
 
 # 设计要求
 
